@@ -1,0 +1,158 @@
+{% extends 'layout.html' %}
+{% block content %}
+<main class="clshome">
+    <h3>TFS Complaints Focus</h3>
+    <p>
+        <small>from FCA website</small><br><br>
+        Our current work <br><br>
+        Based on our work to date, the key questions that we are now focusing on are:
+        <ul>
+            <li>
+                Are firms taking the right steps to ensure that they lend responsibly, in particular by appropriately assessing whether potential customers can afford the product in question?
+            </li>
+            <li>
+                Are there conflicts of interest arising from commission arrangements between lenders and dealers, and if so are these appropriately managed to avoid harm to consumers?
+            </li>
+            <li>
+                Is the information provided to potential customers by firms sufficiently clear and transparent, so that they can understand the risks involved and make informed decisions?
+            </li>
+            <li>
+                Are firms managing the risk that asset valuations could fall and ensuring that they are adequately pricing risk?
+            </li>
+        </ul>
+    </p>
+    <p>
+        <small>Complaints Team</small>
+            <ul>
+                <li>
+                    Michelle Richardson - Team Leader
+                </li>
+                <li>
+                    Debbie Kelly - Team Leader
+                </li>
+                <li>
+                    Claire Styles - Team Member
+                </li>
+                <li>
+                    Godfrey Onyumbe - Team Member
+                </li>
+            </ul>
+    </p>
+</main>
+<section class="clshome"><h4>FCA Complaints Guidelines</h4>
+    <a href="{{ url_for('static', filename='/images/our-work-on-motor-finance-final-findings.pdf') }}">FCA Motor Finance – Final Findings - March 2019</a>
+    <ul>
+        <li>
+            Regulatory Threshold - 8 weeks from date complaint received to final resolution
+        </li>
+        <li>
+            TFS Threshold - 6 weeks from date complaint received to final resolution
+        </li>
+    </ul>
+</section>
+<aside class="clsaside clshome">Statistics
+<table id="statistics">
+    <tr>
+        <th colspan="1">Total no of Complaints</th>
+        <th colspan="1">No of Open Complaints</th>
+    </tr>
+    <tr>
+        <td>
+            {{ total }}
+        </td>
+        <td>
+            {{ open }}
+        </td>
+    </tr>
+    <tr>
+        <th colspan="1">Breached Complaints</th>
+        <th colspan="1">Closed Complaints</th>
+    </tr>
+    <tr>
+        <td>
+            {{ breach }}
+        </td>
+        <td>
+            {{ closed }}
+        </td>
+    </tr>
+    <tr>
+        <th colspan="1">FOS</th>
+        <th colspan="1">Low Level</th>
+    </tr>
+    <tr>
+        <td>
+            {{ fos }}
+        </td>
+        <td>
+            {{ low }}
+        </td>
+    </tr>
+    <tr>
+        <th colspan="1">SADR</th>
+        <th colspan="1">Goodwill</th>
+    </tr>
+    <tr>
+        <td>
+            {{ 15 }}
+        </td>
+        <td>
+            {{ 1 }}
+        </td>
+    </tr>
+     <tr>
+        <th colspan="1">% FOS</th>
+        <th colspan="1">% Closed</th>
+    </tr>
+    <tr>
+        <td>
+            {% if fos == 0 or total ==0 %}
+                {{ 0 }}
+            {% else %}
+                {{ ((fos / total) * 100)|round() }}
+            {% endif %}
+        </td>
+        <td>
+            {% if closed == 0 or total ==0 %}
+                {{ 0 }}
+            {% else %}
+                {{ (((closed / total) * 100)|round()) }}
+            {% endif %}
+        </td>
+    </tr>
+</table>
+</aside>
+<footer class="clshome">
+    <p>
+        © Toyota (GB) PLC is a company registered in England and Wales with registered company number 0916634 with its registered office at Great Burgh, Burgh Heath, Epsom, Surrey,
+KT18 5UX.<br><br>
+
+Toyota (GB) PLC is a member of the Society of Motor Manufacturers and Traders.<br><br>
+
+Toyota Financial Services (UK) PLC. Registered Office: Great Burgh, Burgh Heath, Epsom, Surrey, KT18 5UZ. Registered in England with Number 02299961. Authorised and regulated by the Financial Conduct Authority.
+    </p>
+</footer>
+    <div id="navholder">
+        {% if current_user.is_authenticated %}
+            <a id="hplogout" href="{{url_for('logout')}}">Logout</a>
+            <a id="hpnc" href="{{url_for('new_complaint')}}">New Complaint</a>
+            <a id="hpsuc" href="{{url_for('search_complaint')}}">Search</a>
+        {% else %}
+            <a id="hpreg" href="{{url_for('register')}}">Register</a>
+            <a id="hplog" href="{{url_for('login')}}">Login</a>
+        {% endif %}
+    </div>
+    <div id="hpusr" class="clshpusr">
+{#    {% if current_user %}#}
+{#        {% set ulist = current_user.username.split(".") %}#}
+{#        {% if ulist|length == 1 %}#}
+{#            {{ ulist[0]|capitalize() }} - {{ current_user.id }}#}
+{#        {% else %}#}
+{#            {{ ulist[0]|capitalize() }} {{ ulist[1]|capitalize() }} - {{ current_user.id }}#}
+{#        {% endif %}#}
+{#    {% else %}#}
+{#        {{ None }}#}
+{#    {% endif %}#}
+
+    </div>
+{% endblock content %}

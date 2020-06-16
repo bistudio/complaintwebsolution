@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div id="logcontent">
+        <form id="logform" method='POST' action="">
+            {{ form.hidden_tag() }}
+            <legend id="logsubheader"><span class="border-bottom">User Login</span></legend>
+            <fieldset>
+                <div class="form-group">
+                    {{ form.email.label() }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label() }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.remember.label(class="text-muted small") }}
+                    {{ form.remember(class="checkbox") }}
+                </div>
+                <div class="mt-4">
+                <span class="border-top">
+                    <small class="text-muted">Forgot your password? <a href="{{ url_for('reset_password') }}">Reset Password</a></small>
+                </span>
+                </div>
+                <div class="button mt-2">
+                    {{ form.submit(id='logsubtn', class="btn border-rounded clsbtn") }}
+                </div>
+            </fieldset>
+            <div class="mt-4">
+                <span class="border-top">
+                    <small class="text-muted">Need an account? <a href="{{ url_for('register') }}">Register</a></small>
+                </span>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

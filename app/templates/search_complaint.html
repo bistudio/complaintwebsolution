@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div id="searchcompcontent">
+    {% from "_formhelpers.html" import render_field %}
+        <form method="POST">
+            {{ form.hidden_tag() }}
+             <table style="width:950px; color: #73000d">
+                <tr>
+                    <th colspan="1" style="text-align:left ">Search for a Complaint</th>
+                    <th colspan="1" style="text-align:right ">{% set ulist = current_user.username.split(".") %}
+                    {% if ulist|length == 1 %}
+                    {{ ulist[0]|capitalize() }} - {{ current_user.id }}
+                    {% else %}
+                    {{ ulist[0]|capitalize() }} {{ ulist[1]|capitalize() }} - {{ current_user.id }}
+                    {% endif %}
+                    </th>
+                </tr>
+            </table>
+        <div class="form-group">
+            <fieldset>
+                <div>
+                    {{ form.select.label() }}
+                    {{ form.select(class="selectpicker") }}
+                </div>
+                <div>
+                    {{ form.search.label() }}
+                    {{ form.search(class="form-control form-control-md", style="width:160px;") }}
+                </div>
+                    <div>
+                        <table id="tbldtinp" >
+                            <tr>
+                                <th colspan="1">Start Date</th>
+                                <th colspan="1">End Date</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="dt_r_st" type="date" name="date_received_st">
+                                </td>
+                                <td>
+                                    <input id="dt_r_ed" type="date" name="date_received_ed">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            </fieldset>
+            <div class="pt-2">
+                {{ form.submit(class="btn border-rounded clsbtn")}}
+            </div>
+        </div>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,222 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div id="compcontent">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <table id="displayusr" style="width:960px; color: #73000d">
+                <tr>
+                    <th colspan="1" style="text-align:left ">New Complaint Form</th>
+                    <th colspan="1" style="text-align:right ">{% set ulist = current_user.username.split(".") %}
+                    {% if ulist|length == 1 %}
+                    {{ ulist[0]|capitalize() }} - {{ current_user.id }}
+                    {% else %}
+                    {{ ulist[0]|capitalize() }} {{ ulist[1]|capitalize() }} - {{ current_user.id }}
+                    {% endif %}</th>
+                </tr>
+            </table>
+               <table id="newcomptable">
+                   <tr>
+                       <th colspan="1"><legend id="lgdagrinfo">Agreement Information</legend></th>
+                       <th colspan="1"><legend id="lgdcusinfo">Customer Information</legend></th>
+                       <th colspan="1"><legend id="lgdcompinfo">Complaint Information</legend></th>
+                   </tr>
+                       <tr>
+                            <td>
+                                <fieldset id="fsagrinfo" class="clsfieldset">
+                                    <div id="aggr_no" class="inline-group">
+                                        {{ form.agreement_no.label(class="text-info clslabel") }}
+                                        {% if form.agreement_no.errors %}
+                                            {{ form.agreement_no(class="inline-group clsfeild is-invalid") }}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.agreement_no.errors %}
+                                                <span>{{ 'Please enter agreement no' }}</span>
+                                            {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.agreement_no(class="inline-group clsfeild") }}
+                                        {% endif %}
+                                    </div>
+                                    <div id="manu" class="inline-group">
+                                        {{ form.manufacturer.label(class="text-info clslabel") }}
+                                        {% if form.manufacturer.errors %}
+                                            {{ form.manufacturer(class="selectpicker clsfeild is-invalid") }}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.manufacturer.errors %}
+                                            <span>{{ 'Please select a manufacturer' }}</span>
+                                            {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.manufacturer(class="selectpicker clsfeild") }}
+                                        {% endif %}
+                                    </div>
+                                    <div id="mdl" class="inline-group">
+                                        {{ form.model.label(class="text-info clslabel") }}
+                                        {% if  form.model.errors %}
+                                            {{ form.model(class="selectpicker clsfeild is-invalid") }}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.model.errors  %}
+                                                <span>{{ 'Please select a model' }}</span>
+                                            {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.model(class="selectpicker clsfeild") }}
+                                        {% endif %}
+                                    </div>
+                                    <div id="prd" class="inline-group">
+                                        {{ form.product.label(class="text-info clslabel") }}
+                                        {% if form.product.errors %}
+                                            {{ form.product(class="selectpicker clsfeild is-invalid") }}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.product.errors  %}
+                                                <span>{{ 'Please select a product' }}</span>
+                                            {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.product(class="selectpicker clsfeild") }}
+                                        {% endif %}
+                                    </div>
+                                    <div id="va" class="inline-group">
+                                        {{ form.vehicle_age.label(class="text-info clslabel") }}
+                                        {% if form.vehicle_age.errors %}
+                                            {{ form.vehicle_age(class="selectpicker clsfeild is-invalid") }}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.vehicle_age.errors %}
+                                                <span>{{ 'Please select a vehicle age' }}</span>
+                                            {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.vehicle_age(class="selectpicker clsfeild") }}
+                                        {% endif %}
+                                    </div>
+                                    <div id="ctr" class="inline-group">
+                                        {{ form.centre.label(class="text-info clslabel") }}
+                                        {{ form.centre(class="selectpicker clsfeild") }}
+                                    </div>
+                                </fieldset>
+                            </td>
+                            <td>
+                                <fieldset class="clsfieldset">
+                                    <div class="inline-group">
+                                        {{ form.company.label(class="text-info clslabel") }}
+                                        {{ form.company(class="form-control clscusinfo") }}
+                                    </div>
+                                    <div class="inline-group">
+                                        {{ form.title.label(class="text-info clslabel") }}
+                                        {{ form.title(class="selectpicker clsfeild") }}
+                                    </div>
+                                    <div class="inline-group">
+                                        {{ form.first_name.label(class="text-info clslabel") }}
+                                        {{ form.first_name(class="form-control clscusinfo") }}
+                                    </div>
+                                    <div class="inline-group">
+                                        {{ form.middle_name.label(class="text-info clslabel") }}
+                                        {{ form.middle_name(class="form-control clscusinfo") }}
+                                    </div>
+                                    <div class="inline-group">
+                                        {{ form.last_name.label(class="text-info clslabel") }}
+                                        {{ form.last_name(class="form-control clscusinfo") }}
+                                    </div>
+                                    <div class="inline-group">
+                                        {{ form.email.label(class="text-info clslabel") }}
+                                        {{ form.email(class="form-control clscusinfo") }}
+                                    </div>
+                                    <div class="inline-group">
+                                        {{ form.contact_no.label(class="text-info clslabel") }}
+                                        {{ form.contact_no(class="form-control clscusinfo") }}
+                                    </div>
+                                </fieldset>
+                            </td>
+                            <td>
+                                <fieldset class="clsfieldset">
+                                    <div id="cid" class="inline-group">
+                                        {{ form.complaint_no.label(class="text-info clslabel") }}
+                                        {{ form.complaint_no(class="text text-inline border-0 clsfeild", readonly="readonly") }}
+                                    </div>
+                                    <div id="compgrp" class="inline-group">
+                                        {{ form.complaint_group.label(class="text-info clslabel") }}
+                                        {% if form.complaint_group.errors %}
+                                            {{ form.complaint_group(class="selectpicker clsfeild is-invalid") }}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.complaint_group.errors %}
+                                                <span>{{ 'Please select a app group' }}</span>
+                                            {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.complaint_group(class="selectpicker clsfeild") }}
+                                        {% endif %}
+                                    </div>
+                                    <div id="compsrc" class="inline-group">
+                                        {{ form.complaint_source.label(class="text-info clslabel") }}
+                                        {% if form.complaint_source.errors %}
+                                            {{ form.complaint_source(class="selectpicker clsfeild is-invalid") }}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.complaint_source.errors %}
+                                                <span>{{ 'Please select a app source' }}</span>
+                                            {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.complaint_source(class="selectpicker clsfeild") }}
+                                        {% endif %}
+                                    </div>
+                                   <div id="compserv" class="inline-group">
+                                        {{ form.severity.label(class="text-info clslabel") }}
+                                       {% if form.severity.errors %}
+                                           {{ form.severity(class="selectpicker clsfeild is-invalid") }}
+                                           <div class="invalid-feedback">
+                                           {% for error in form.severity.errors %}
+                                               <span>{{ 'Please select app severity' }}</span>
+                                           {% endfor %}
+                                           </div>
+                                       {% else %}
+                                           {{ form.severity(class="selectpicker clsfeild") }}
+                                       {% endif %}
+                                    </div>
+                                   <div id="compsts" class="inline-group">
+                                        {{ form.complaint_status.label(class="text-info clslabel") }}
+                                        {{ form.complaint_status(class="text text-inline border-0 clsfeild", readonly='readonly') }}
+                                    </div>
+                                    <div id="daterec" class="inline-group">
+                                        {{ form.date_received.label(class="text-info clslabel") }}
+                                        {{ form.date_received(class="text text-inline border-0 clsfeild", readonly="readonly") }}
+                                    </div>
+                                    <div id="resdate" class="inline-group">
+                                        {{ form.reg_due_date.label(class="text-info clslabel") }}
+                                        {{ form.reg_due_date(class="text text-inline border-0 clsfeild", readonly="readonly") }}
+                                    </div>
+                                </fieldset>
+                            </td>
+                            </tr>
+                           <tr>
+                                <th colspan="3">{{ form.complaint_narrative.label(class="text-info") }}</th>
+                           </tr>
+                               <tr>
+                                    <td colspan="3">
+                                        <fieldset id="fscompinfo">
+                                            <div class="form-control-plaintext">
+                                                {{ form.complaint_narrative(class="form-control clscompnarr", maxlength="200")}}
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                            <tr>
+                           <tr>
+                                <th></th>
+                           </tr>
+
+                                <td style="text-align:left; padding:0;">
+                                    <a href="{{ url_for('search_complaint') }}" class="clsupdlink">Search or Update a Complaint</a>
+                                </td>
+                               <td>
+
+                               </td>
+                                <td style="text-align:right; padding:0;">
+                                    <div class="btn inline-group">
+                                        <input type="reset" value="Clear" class="btn border-rounded clsbtn">
+                                        {{ form.submit(class="btn border-rounded clsbtn")}}
+                                    </div>
+                                </td>
+                            </tr>
+                </table>
+        </form>
+    </div>
+{% endblock content %}
